@@ -1,0 +1,17 @@
+.modal-dialog {
+    text-align: center;
+
+    .modal-content {
+        background-color: black;
+        border: 1px solid red;
+
+        .modal-body {
+            padding-bottom: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    }
+    
+}

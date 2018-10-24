@@ -1,0 +1,15 @@
+.counter-with-buttons-wrapper {
+    display: flex;
+    flex-flow: wrap;
+    text-align: center;
+
+    .col-50-percent {
+        flex: 0 0 50%;
+    }
+    
+    .col-100-percent {
+        flex: 0 0 100%;
+    }
+
+}
+

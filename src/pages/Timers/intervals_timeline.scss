@@ -1,0 +1,36 @@
+.intervals-timeline-wrapper {
+    padding-top: 15px;
+
+    .loading-bars-wrapper {
+        height: 130px;
+        padding-top: 50px;
+    }
+
+    .vis-panel {
+        box-sizing: content-box;
+    }
+
+    .loading-bars-wrapper {
+        text-align: center;
+    }
+
+    .vis-time-axis .vis-text,
+    .vis-labelset .vis-label {
+        color: #52FEFE;
+    }
+
+    .vis-item.vis-background {
+        background-color: #52FEFE;
+    }
+
+    .vis-timeline {
+        visibility: visible!important;
+    }
+    
+    .vis-item-content {
+        //transform: rotate(-90deg);
+        //margin-top: 60px;
+        //font-size: 12px; 
+    }
+
+}

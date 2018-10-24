@@ -1,0 +1,51 @@
+.loading-spinner-wrapper {
+    position: relative;
+    height: 100px;
+    text-align: left;
+
+    .loader, .loader span, .spinner {
+        position:absolute;
+        width:100px;
+        height:100px;
+        top:50%;
+        left:50%;
+        margin:-50px 0 0 -50px;
+    }
+
+    .loader span {
+        line-height:100px;
+        padding-left:27px;
+        font-size:12px;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing:1px;
+        color:rgba(255,255,255,0);
+        text-shadow: 0 0 0 rgba(255,255,255,.75), 0 0 2px rgba(82, 254, 254,1), 0 0 4px rgba(82, 254, 254,1), 0 0 0px rgba(82, 254, 254,1), 0 0 8px rgba(82, 254, 254,1), 0 0 10px rgba(82, 254, 254,1);
+    }
+
+    .spinner {
+        border-radius:50%;
+        box-shadow: 3px 0 1px -1px rgba(255,255,255,1), 5px 0 5px rgba(82, 254, 254,1), inset 0px 0 0px -5px rgba(82, 254, 254,1);
+        animation:loading 1s linear infinite;
+    }
+
+    @keyframes loading {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .spinner:before {
+        position:absolute;
+        width:80px;
+        height:80px;
+        margin:10% 0 0 10%;
+        border-radius:50%;
+        content:'';
+        box-shadow: 2px 0 1px -1px rgba(255,255,255,1), 0px 0 5px -5px rgba(82, 254, 254,1), inset -3px 0 3px rgba(82, 254, 254,1);
+    }
+
+
+}

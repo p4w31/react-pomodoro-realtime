@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'SpaceMono';
+    src: local('SpaceMono'), url(../../fonts/SpaceMono-Regular.ttf) format('truetype');
+}
+
+.timers-page-wrapper * {
+    font-family: 'SpaceMono', sans-serif;
+}
+
+.timers-page-wrapper {
+    background-color: black;
+    color: #52FEFE;
+    font-family: 'SpaceMono', sans-serif;
+}
+
+.timers-page-wrapper {
+    text-align: left;
+}
+
+.timers-page-wrapper .intervals-table td {
+    padding: 10px;
+}
+    

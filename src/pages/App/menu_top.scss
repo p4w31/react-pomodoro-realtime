@@ -1,0 +1,23 @@
+.menu-top-wrapper {
+    overflow: auto;
+    padding-top: 5px;
+
+    .menu-link {
+        cursor: pointer;
+        float: left;
+        margin-left: 20px;
+    }
+
+    .menu-link:first-child {
+        margin-left: 0;
+    }
+
+    .menu-link.logout {
+        float:right;
+    }
+
+    .menu-link.email {
+        float:right;
+        cursor: default;
+    }
+}
