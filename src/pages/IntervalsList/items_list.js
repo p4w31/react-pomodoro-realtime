@@ -7,7 +7,8 @@ import moment from 'moment';
 import LoadingBars from '../../components/loading_bars';
 import ModalError from '../../components/modal_error';
 import EditableItemTitle from './editable_item_title';
-import { removeIntervalByDate, fetchIntervalsOnceByDate } from '../../actions/intervals.js';
+import { removeIntervalByDate, fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
+import getIntervals from '../../selectors/IntervalsSelectors';
 
 import './items_list.scss';
 
@@ -90,7 +91,7 @@ class ItemsList extends Component{
 
 function mapStateToProps(state) {
     return {
-        intervals: state.intervals
+        intervals: getIntervals(state),
     };
 }
 

@@ -4,11 +4,12 @@ import './animated_counter.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCounterDetails,
-    setCounterDetailsType } from '../../actions/counter_details';
+    setCounterDetailsType } from '../../actions/CounterActions';
 import { 
     fetchIntervalsOnceByDate, 
-    addInterval } from '../../actions/intervals.js';
+    addInterval } from '../../actions/IntervalsActions.js';
 import ModalError from '../../components/modal_error';
+import getCounterDetails from '../../selectors/CounterSelectors';
 
 
 class AnimatedCounter extends Component {
@@ -163,7 +164,7 @@ class AnimatedCounter extends Component {
 
 function mapStateToProps(state) {
     return {
-        counterDetails: state.counterDetails
+        counterDetails: getCounterDetails(state)
     };
 }
 

@@ -6,13 +6,16 @@ import './index.scss';
 
 import { removeIntervalByDate, 
         fetchIntervalsOnceByDate, 
-        addInterval } from '../../actions/intervals.js';
+        addInterval } from '../../actions/IntervalsActions.js';
 
 import _ from 'lodash';
 import withAuthorization from '../../components/with_authorization';
 import LoadingBars from '../../components/loading_bars';
 import AddRow from './add_row';
 import ItemsList from './items_list';
+import getUser from '../../selectors/UserSelectors';
+import getIntervals from '../../selectors/IntervalsSelectors';
+
 
 class IntervalsListPage extends Component {
     constructor(props) {
@@ -42,8 +45,8 @@ class IntervalsListPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        intervals: state.intervals,
-        user: state.user
+        intervals: getIntervals(state),
+        user: getUser(state)
     };
 }
 

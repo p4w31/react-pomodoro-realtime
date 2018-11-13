@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { setCounterDetails } from '../../actions/counter_details';
-import { addInterval } from '../../actions/intervals';
+import { setCounterDetails } from '../../actions/CounterActions';
+import { addInterval } from '../../actions/IntervalsActions';
 import moment from 'moment';
 import './counter_buttons.scss';
 import ModalError from '../../components/modal_error';
+import getIntervals from '../../selectors/IntervalsSelectors';
+import getCounterDetails from '../../selectors/CounterSelectors';
 
 class CounterButtons extends Component {
     constructor (props) {
@@ -57,8 +59,8 @@ class CounterButtons extends Component {
                     disabled: false
                 },
                 {
-                    label: '1h',
-                    value: 3600,
+                    label: '15',
+                    value: 900,
                     active: false,
                     disabled: false
                 },
@@ -205,8 +207,8 @@ class CounterButtons extends Component {
 
 function mapStateToProps(state) {
     return {
-        counterDetails: state.counterDetails,
-        intervals: state.intervals
+        counterDetails: getCounterDetails(state),
+        intervals: getIntervals(state)
     };
 }
 

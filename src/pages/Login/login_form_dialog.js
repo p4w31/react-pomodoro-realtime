@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
 import ModalError from '../../components/modal_error';
 
-import { signInWithEmailAndPassword, verifyAuth, signOut } from '../../actions/auth.js';
+import { signInWithEmailAndPassword, verifyAuth, signOut } from '../../actions/UserActions.js';
+import getUser from '../../selectors/UserSelectors';
 import './login_form_dialog.scss';
 
 class LoginFormDialog extends Component {
@@ -85,7 +86,7 @@ class LoginFormDialog extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: getUser(state)
     };
 }
 

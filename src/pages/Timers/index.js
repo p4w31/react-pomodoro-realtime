@@ -9,7 +9,7 @@ import IntervalsTimeline from './intervals_timeline';
 import CounterButtons from './counter_buttons';
 import LoadingSpinner from '../../components/loading_spinner';
 
-import { fetchIntervalsOnceByDate } from '../../actions/intervals.js';
+import { fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
 
 import './index.scss';
 

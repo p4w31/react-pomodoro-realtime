@@ -3,7 +3,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-import { addInterval } from '../../actions/intervals';
+import { addInterval } from '../../actions/IntervalsActions';
 import ModalError from '../../components/modal_error';
 
 import './add_row.scss';

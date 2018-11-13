@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { verifyAuth, userSignedIn,  } from '../actions/auth';
+import { verifyAuth, userSignedIn,  } from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
 import * as firebase from "firebase";
 

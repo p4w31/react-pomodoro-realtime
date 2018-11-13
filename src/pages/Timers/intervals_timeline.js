@@ -6,7 +6,7 @@ import './intervals_timeline.scss';
 
 import Timeline from 'react-visjs-timeline';
 import LoadingBars from '../../components/loading_bars';
-
+import getIntervals from '../../selectors/IntervalsSelectors';
 
 class IntervalsTimeline extends Component {
     constructor (props) {
@@ -78,7 +78,7 @@ class IntervalsTimeline extends Component {
 
 function mapStateToProps(state) {
     return {
-        intervals: state.intervals
+        intervals: getIntervals(state)
     };
 }
 

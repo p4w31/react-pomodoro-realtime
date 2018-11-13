@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut } from '../../actions/auth.js';
+import { signOut } from '../../actions/UserActions.js';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
+import getUser from '../../selectors/UserSelectors';
 
 import './menu_top.scss';
 
@@ -54,7 +55,7 @@ class MenuTop extends Component {
 
 function mapStatsToProps(state) {
     return {
-        user: state.user
+        user: getUser(state)
     };
 }
 

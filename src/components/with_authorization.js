@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { verifyAuth } from '../actions/auth';
+import { verifyAuth } from '../actions/UserActions';
 import LoadingSpinner from './loading_spinner';
+import getUser from '../selectors/UserSelectors';
 
 const withAuthorization = (WrappedComponent) => {
     class WithAuthorization extends Component {
@@ -26,7 +27,7 @@ const withAuthorization = (WrappedComponent) => {
 
     function mapStateToProps(state) {
         return {
-            user: state.user
+            user: getUser(state)
         };
     }
 
