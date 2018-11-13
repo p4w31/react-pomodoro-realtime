@@ -18,9 +18,9 @@ function EditableItemTitle({item, removeInterval}) {
                 { item.data.type }
             </td>
             <td>
-                <span style={{ fontSize: '20px', float: 'right' }} 
+                <span className="remove-btn" 
                     onClick={ () => removeInterval(item.key) }>
-                    X
+                    &#10005;
                 </span>
             </td>
         </tr>
