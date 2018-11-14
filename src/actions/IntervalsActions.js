@@ -1,5 +1,6 @@
 import { databaseRef, intervalsRef } from "../config/firebase";
 import moment from 'moment';
+import * as types from '../constants/ActionTypes';
 
 export function removeIntervalByDate(intervalId, date) {
     return function(dispatch, getState) {
@@ -27,7 +28,7 @@ export function removeIntervalByDate(intervalId, date) {
 
 export function toggleIntervalCompleted(intervalId) {
     return {
-        type: 'TOGGLE_INTERVAL_COMPLETED',
+        type: types.TOGGLE_INTERVAL_COMPLETED,
         payload: {
             id: intervalId
         }
@@ -41,7 +42,7 @@ export function fetchIntervals() {
         let userintervalsRef = databaseRef.child("intervals");
         userintervalsRef.on("value", snapshot => {
             dispatch({
-                type: 'FETCH_INTERVALS',
+                type: types.FETCH_INTERVALS,
                 payload: snapshot.val()
             });
         });
@@ -56,7 +57,7 @@ export function fetchIntervalsOnceByDate(date) {
 
         userintervalsRef.once("value", snapshot => {
             dispatch({
-                type: 'FETCH_INTERVALS',
+                type: types.FETCH_INTERVALS,
                 payload: snapshot.val()
             });
         });
@@ -64,7 +65,7 @@ export function fetchIntervalsOnceByDate(date) {
 }
 
 export const fetchIntervalsBegin = () => ({
-    type: 'FETCH_INTERVALS_BEGIN'
+    type: types.FETCH_INTERVALS_BEGIN
 });
 
 export function addInterval(newInterval, date){

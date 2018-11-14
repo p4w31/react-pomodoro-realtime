@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import * as types from '../constants/ActionTypes';
 
 export function signInWithEmailAndPassword(email, password) {
     return function(dispatch) {
@@ -14,13 +15,13 @@ export function signOut() {
 
 export function userSignedIn(user) {
     return {
-        type: 'USER_SIGNED_IN',
+        type: types.USER_SIGNED_IN,
         payload: { user: user }
     }
 }
 
 export function userSignedOut() {
-    return { type: 'USER_SIGNED_OUT' }
+    return { type: types.USER_SIGNED_OUT }
 }
 
 export function verifyAuth() {

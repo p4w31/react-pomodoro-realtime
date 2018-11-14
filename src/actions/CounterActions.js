@@ -1,6 +1,8 @@
+import * as types from '../constants/ActionTypes';
+
 export function setCounterDetails(countdownTime, countdownStart, countdownStop, type, flag) {
     return {
-        type: 'CHANGE_COUNTER_DETAILS',
+        type: types.CHANGE_COUNTER_DETAILS,
         payload: {
             countdownTime,
             countdownStart, 
@@ -13,7 +15,7 @@ export function setCounterDetails(countdownTime, countdownStart, countdownStop, 
 
 export function setCounterDetailsType(flag) {
     return {
-        type: 'CHANGE_COUNTER_DETAILS_TYPE',
+        type: types.CHANGE_COUNTER_DETAILS_TYPE,
         payload: {
             flag
         }
@@ -22,7 +24,7 @@ export function setCounterDetailsType(flag) {
 
 export function addInterval(interval) {
     return {
-        type: 'ADD_INTERVAL',
+        type: types.ADD_INTERVAL,
         payload: interval
     };
 }
