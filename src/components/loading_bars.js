@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './loading_bars.scss';
 
 function LoadingBars(props) {

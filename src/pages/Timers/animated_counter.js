@@ -107,13 +107,13 @@ class AnimatedCounter extends Component {
         }
       
         else if (Notification.permission === "granted") {
-            var notification = new Notification(message);
+            new Notification(message);
         }
       
         else if (Notification.permission !== "denied") {
             Notification.requestPermission(function (permission) {
                 if (permission === "granted") {
-                    var notification = new Notification(message);
+                    new Notification(message); 
                 }
             });
         }

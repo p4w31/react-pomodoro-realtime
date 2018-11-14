@@ -8,7 +8,6 @@ import withAuthorization from '../../components/with_authorization';
 import AnimatedCounter from './animated_counter';
 import IntervalsTimeline from './intervals_timeline';
 import CounterButtons from './counter_buttons';
-import LoadingSpinner from '../../components/loading_spinner';
 import { fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
 
 import './index.scss';

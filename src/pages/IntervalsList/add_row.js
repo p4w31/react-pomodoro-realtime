@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { FormGroup, Label, Input } from 'reactstrap';
 import { addInterval } from '../../actions/IntervalsActions';
 import ModalError from '../../components/modal_error';
 import PropTypes from 'prop-types';

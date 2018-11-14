@@ -1,14 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import _ from 'lodash';
 import withAuthorization from '../../components/with_authorization';
-import LoadingBars from '../../components/loading_bars';
 import AddRow from './add_row';
 import ItemsList from './items_list';
 import getUser from '../../selectors/UserSelectors';
-import getIntervals from '../../selectors/IntervalsSelectors';
 import PropTypes from 'prop-types';
 
 import './index.scss';
