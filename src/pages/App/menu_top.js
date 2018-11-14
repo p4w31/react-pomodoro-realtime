@@ -5,8 +5,16 @@ import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import getUser from '../../selectors/UserSelectors';
+import PropTypes from 'prop-types';
 
 import './menu_top.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    user: PropTypes.object,
+    signOut: PropTypes.func,
+};
 
 class MenuTop extends Component {
     logout = () => {
@@ -65,6 +73,9 @@ function mapDispatchToProps(dispatch) {
         signOut
     }, dispatch);
 }
+
+MenuTop.defaultProps = defaultProps;
+MenuTop.propTypes = propTypes;
 
 export default compose(
     withRouter,

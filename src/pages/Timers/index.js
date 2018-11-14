@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import withAuthorization from '../../components/with_authorization';
 import AnimatedCounter from './animated_counter';
 import IntervalsTimeline from './intervals_timeline';
 import CounterButtons from './counter_buttons';
 import LoadingSpinner from '../../components/loading_spinner';
-
 import { fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
 
 import './index.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    fetchIntervalsOnceByDate: PropTypes.func,
+};
 
 class TimersPage extends Component {
 
@@ -45,5 +51,8 @@ function mapDispatchToProps(dispatch) {
         fetchIntervalsOnceByDate
     }, dispatch);
 }
+
+TimersPage.defaultProps = defaultProps;
+TimersPage.propTypes = propTypes;
 
 export default connect(null, mapDispatchToProps)(withAuthorization(TimersPage));

@@ -3,14 +3,22 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-
 import LoadingBars from '../../components/loading_bars';
 import ModalError from '../../components/modal_error';
 import EditableItemTitle from './editable_item_title';
 import { removeIntervalByDate, fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
 import getIntervals from '../../selectors/IntervalsSelectors';
+import PropTypes from 'prop-types';
 
 import './items_list.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    intervals: PropTypes.object,
+    removeIntervalByDate: PropTypes.func,
+    fetchIntervalsOnceByDate: PropTypes.func,
+};
 
 class ItemsList extends Component{
     constructor(props) {
@@ -87,8 +95,6 @@ class ItemsList extends Component{
 
 }
 
-//export default ItemsList;
-
 function mapStateToProps(state) {
     return {
         intervals: getIntervals(state),
@@ -101,5 +107,8 @@ function mapDispatchToProps(dispatch) {
         fetchIntervalsOnceByDate
     }, dispatch);
 }
+
+ItemsList.defaultProps = defaultProps;
+ItemsList.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemsList);

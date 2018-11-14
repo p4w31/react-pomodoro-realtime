@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
-import './intervals_timeline.scss';
-
 import Timeline from 'react-visjs-timeline';
 import LoadingBars from '../../components/loading_bars';
 import getIntervals from '../../selectors/IntervalsSelectors';
+import PropTypes from 'prop-types';
+
+import './intervals_timeline.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    intervals: PropTypes.object
+};
 
 class IntervalsTimeline extends Component {
     constructor (props) {
@@ -81,5 +88,8 @@ function mapStateToProps(state) {
         intervals: getIntervals(state)
     };
 }
+
+IntervalsTimeline.defaultProps = defaultProps;
+IntervalsTimeline.propTypes = propTypes;
 
 export default connect(mapStateToProps)(IntervalsTimeline);

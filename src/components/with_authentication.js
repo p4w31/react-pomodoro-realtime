@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { verifyAuth, userSignedIn,  } from '../actions/UserActions';
+import { userSignedIn } from '../actions/UserActions';
 import { bindActionCreators } from 'redux';
 import * as firebase from "firebase";
+import PropTypes from 'prop-types';
 
 const withAuthentication = (WrappedComponent) => {
+    const defaultProps = {};
+      
+    const propTypes = {
+        userSignedIn: PropTypes.func,
+    };
+
     class WithAuthentication extends Component {
 
         componentDidMount() {
@@ -26,10 +33,12 @@ const withAuthentication = (WrappedComponent) => {
 
     function mapDispatchToProps(dispatch) {
         return bindActionCreators({
-            verifyAuth,
-            userSignedIn
+            userSignedIn,
         }, dispatch);
     }
+
+    WithAuthentication.defaultProps = defaultProps;
+    WithAuthentication.propTypes = propTypes;
 
     return connect(null, mapDispatchToProps)(WithAuthentication);
 

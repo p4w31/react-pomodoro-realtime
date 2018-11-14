@@ -5,10 +5,21 @@ import _ from 'lodash';
 import { setCounterDetails } from '../../actions/CounterActions';
 import { addInterval } from '../../actions/IntervalsActions';
 import moment from 'moment';
-import './counter_buttons.scss';
 import ModalError from '../../components/modal_error';
-import getIntervals from '../../selectors/IntervalsSelectors';
 import getCounterDetails from '../../selectors/CounterSelectors';
+import PropTypes from 'prop-types';
+
+import './counter_buttons.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    counterDetails: PropTypes.shape({
+        flag: PropTypes.oneOf(['not_started', 'started', 'in_progress', 'finished'])
+    }),
+    setCounterDetailsType: PropTypes.func,
+    addInterval: PropTypes.func,
+};
 
 class CounterButtons extends Component {
     constructor (props) {
@@ -59,7 +70,7 @@ class CounterButtons extends Component {
                     disabled: false
                 },
                 {
-                    label: '15',
+                    label: '15m',
                     value: 900,
                     active: false,
                     disabled: false
@@ -208,7 +219,6 @@ class CounterButtons extends Component {
 function mapStateToProps(state) {
     return {
         counterDetails: getCounterDetails(state),
-        intervals: getIntervals(state)
     };
 }
 
@@ -218,5 +228,8 @@ function mapDispatchToProps(dispatch) {
         addInterval: addInterval
     }, dispatch);
 }
+
+CounterButtons.defaultProps = defaultProps;
+CounterButtons.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(CounterButtons);

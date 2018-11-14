@@ -3,10 +3,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
 import ModalError from '../../components/modal_error';
+import { signInWithEmailAndPassword, verifyAuth } from '../../actions/UserActions.js';
+import PropTypes from 'prop-types';
 
-import { signInWithEmailAndPassword, verifyAuth, signOut } from '../../actions/UserActions.js';
-import getUser from '../../selectors/UserSelectors';
 import './login_form_dialog.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    signInWithEmailAndPassword: PropTypes.func,
+    verifyAuth: PropTypes.func,
+    history: PropTypes.shape({
+        push: PropTypes.func
+    }),
+};
 
 class LoginFormDialog extends Component {
     constructor(props){
@@ -17,7 +27,6 @@ class LoginFormDialog extends Component {
             inputPassword: '',
             modalError: false 
         };
-        
     }
 
     componentDidMount() {
@@ -60,18 +69,20 @@ class LoginFormDialog extends Component {
                 <div>
                     <label htmlFor="email" >Email</label>
                     <input id="email"
-                    value={ this.state.inputUser } 
-                    onChange={ this.inputUserChange } 
-                    type="text" 
-                    placeholder="Email" />
+                        value={ this.state.inputUser } 
+                        onChange={ this.inputUserChange } 
+                        type="text" 
+                        placeholder="Email" 
+                    />
                 </div>
                 <div>
                     <label htmlFor="password" >Password</label>
                     <input id="password"
-                    value={ this.state.inputPassword } 
-                    onChange={ this.inputPasswordChange } 
-                    type="password" 
-                    placeholder="Password" />
+                        value={ this.state.inputPassword } 
+                        onChange={ this.inputPasswordChange } 
+                        type="password" 
+                        placeholder="Password" 
+                    />
                 </div>
                 <div>
                     <button type="submit">Login</button>
@@ -84,18 +95,14 @@ class LoginFormDialog extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: getUser(state)
-    };
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators ({
         signInWithEmailAndPassword,
         verifyAuth,
-        signOut
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginFormDialog));
+LoginFormDialog.defaultProps = defaultProps;
+LoginFormDialog.propTypes = propTypes;
+
+export default connect(null, mapDispatchToProps)(withRouter(LoginFormDialog));

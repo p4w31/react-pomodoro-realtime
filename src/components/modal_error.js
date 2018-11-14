@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import './modal.scss';
+
+const defaultProps = {
+    message: 'Error',
+  };
+  
+const propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
+    message: PropTypes.string,
+};
 
 class ModalError extends Component {
     constructor(props) {
@@ -21,5 +32,8 @@ class ModalError extends Component {
         );
     };
 }
+
+ModalError.defaultProps = defaultProps;
+ModalError.propTypes = propTypes;
 
 export default ModalError;

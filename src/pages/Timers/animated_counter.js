@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import './animated_counter.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setCounterDetails,
-    setCounterDetailsType } from '../../actions/CounterActions';
-import { 
-    fetchIntervalsOnceByDate, 
-    addInterval } from '../../actions/IntervalsActions.js';
+import { setCounterDetailsType } from '../../actions/CounterActions';
+import { addInterval } from '../../actions/IntervalsActions.js';
 import ModalError from '../../components/modal_error';
 import getCounterDetails from '../../selectors/CounterSelectors';
+import PropTypes from 'prop-types';
 
+import './animated_counter.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    counterDetails: PropTypes.shape({
+        flag: PropTypes.oneOf(['not_started', 'started', 'in_progress', 'finished'])
+    }),
+    setCounterDetailsType: PropTypes.func,
+    addInterval: PropTypes.func,
+};
 
 class AnimatedCounter extends Component {
     constructor(props) {
@@ -40,11 +48,6 @@ class AnimatedCounter extends Component {
     }
 
     componentDidUpdate() {
-        /**
-         * TODO
-         * add possible states to propTypes
-         * not_started, started, in_progress, finished
-         */
         if ( this.props.counterDetails.flag === 'started' ) {
             this.countdown( this.props.counterDetails.countdownTime);
             this.props.setCounterDetailsType('in_progress');
@@ -81,7 +84,6 @@ class AnimatedCounter extends Component {
                 stop: this.calculatedStopTime.unix(),
                 type: this.props.counterDetails.type
             }).then(() => {
-                    //this.props.fetchIntervalsOnceByDate(this.state.currentDay);
                     /**
                      * TODO success modal
                      */
@@ -170,11 +172,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        setCounterDetails,
         setCounterDetailsType,
         addInterval,
-        fetchIntervalsOnceByDate
     }, dispatch);
 }
+
+AnimatedCounter.defaultProps = defaultProps;
+AnimatedCounter.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimatedCounter);

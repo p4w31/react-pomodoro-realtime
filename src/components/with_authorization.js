@@ -4,8 +4,16 @@ import { bindActionCreators } from 'redux';
 import { verifyAuth } from '../actions/UserActions';
 import LoadingSpinner from './loading_spinner';
 import getUser from '../selectors/UserSelectors';
+import PropTypes from 'prop-types';
 
 const withAuthorization = (WrappedComponent) => {
+    const defaultProps = {};
+      
+    const propTypes = {
+        user: PropTypes.object,
+        verifyAuth: PropTypes.func,
+    };
+    
     class WithAuthorization extends Component {
 
         componentDidMount() {
@@ -36,6 +44,9 @@ const withAuthorization = (WrappedComponent) => {
             verifyAuth
         }, dispatch);
     }
+
+    WithAuthorization.defaultProps = defaultProps;
+    WithAuthorization.propTypes = propTypes;
 
     return connect(mapStateToProps, mapDispatchToProps)(WithAuthorization);
 }

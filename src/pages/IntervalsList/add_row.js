@@ -5,8 +5,15 @@ import { bindActionCreators } from 'redux';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import { addInterval } from '../../actions/IntervalsActions';
 import ModalError from '../../components/modal_error';
+import PropTypes from 'prop-types';
 
 import './add_row.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    addInterval: PropTypes.func, 
+};
 
 class AddRow extends Component {
     constructor(props) {
@@ -125,5 +132,8 @@ function mapDispatchToProps(dispatch) {
         addInterval: addInterval
     }, dispatch);
 }
+
+AddRow.defaultProps = defaultProps;
+AddRow.propTypes = propTypes;
 
 export default connect(null, mapDispatchToProps)(AddRow);

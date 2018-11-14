@@ -2,12 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import './index.scss';
-
-import { removeIntervalByDate, 
-        fetchIntervalsOnceByDate, 
-        addInterval } from '../../actions/IntervalsActions.js';
-
 import _ from 'lodash';
 import withAuthorization from '../../components/with_authorization';
 import LoadingBars from '../../components/loading_bars';
@@ -15,7 +9,15 @@ import AddRow from './add_row';
 import ItemsList from './items_list';
 import getUser from '../../selectors/UserSelectors';
 import getIntervals from '../../selectors/IntervalsSelectors';
+import PropTypes from 'prop-types';
 
+import './index.scss';
+
+const defaultProps = {};
+  
+const propTypes = {
+    user: PropTypes.object,
+};
 
 class IntervalsListPage extends Component {
     constructor(props) {
@@ -45,17 +47,11 @@ class IntervalsListPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        intervals: getIntervals(state),
-        user: getUser(state)
+        user: getUser(state),
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        addInterval,
-        removeIntervalByDate,
-        fetchIntervalsOnceByDate,
-    }, dispatch);
-}
+IntervalsListPage.defaultProps = defaultProps;
+IntervalsListPage.propTypes = propTypes;
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuthorization(IntervalsListPage));
+export default connect(mapStateToProps)(withAuthorization(IntervalsListPage));
