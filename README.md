@@ -8,6 +8,7 @@ https://react-pomodoro-realtime.herokuapp.com
 * App tracks time for pomodoro periods 
 
 ## TODO
+* add tests
 * better work-break flow
 * measurement of caffeine intake
 * full history
