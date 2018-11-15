@@ -1,3 +1,6 @@
+## Demo
+https://react-pomodoro-realtime.herokuapp.com
+
 ## Description
 
 * App build on top of my boilerplate for firebase based BaaS that can be found here: https://github.com/p4w31/react-basic-auth
