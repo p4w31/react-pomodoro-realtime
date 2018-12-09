@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signOut } from '../../actions/UserActions.js';
+import { userActions, userSelectors } from '../../state/ducks/user';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import getUser from '../../selectors/UserSelectors';
 import PropTypes from 'prop-types';
 
 import './menu_top.scss';
@@ -63,14 +62,14 @@ class MenuTop extends Component {
 
 function mapStatsToProps(state) {
     return {
-        user: getUser(state)
+        user: userSelectors.getUser(state)
     };
 }
 
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators ({
-        signOut
+        signOut: userActions.signOut
     }, dispatch);
 }
 

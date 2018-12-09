@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-
 import withAuthorization from '../../components/with_authorization';
 import AnimatedCounter from './animated_counter';
 import IntervalsTimeline from './intervals_timeline';
 import CounterButtons from './counter_buttons';
-import { fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
+import { intervalsActions } from '../../state/ducks/intervals';
 
 import './index.scss';
 
@@ -47,7 +46,7 @@ class TimersPage extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fetchIntervalsOnceByDate
+        fetchIntervalsOnceByDate: intervalsActions.fetchIntervalsOnceByDate
     }, dispatch);
 }
 

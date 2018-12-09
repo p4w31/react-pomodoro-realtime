@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { userSignedIn } from '../actions/UserActions';
+import { userActions } from '../state/ducks/user';
 import { bindActionCreators } from 'redux';
 import * as firebase from "firebase";
 import PropTypes from 'prop-types';
@@ -33,7 +33,7 @@ const withAuthentication = (WrappedComponent) => {
 
     function mapDispatchToProps(dispatch) {
         return bindActionCreators({
-            userSignedIn,
+            userSignedIn: userActions.userSignedIn,
         }, dispatch);
     }
 

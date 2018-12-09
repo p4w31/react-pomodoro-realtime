@@ -1,12 +1,12 @@
+import * as types from "./types";
 import _ from 'lodash';
-import * as types from '../constants/ActionTypes';
 
 const initialState = {
     items: [],
     loading: false
 };
 
-export default function(state = initialState, action) {
+const intervalsReducer = function(state = initialState, action) {
     switch (action.type) {
 
         case types.FETCH_INTERVALS:
@@ -42,4 +42,6 @@ export default function(state = initialState, action) {
         default:
             return state;
     }
-};
+}
+
+export default intervalsReducer;

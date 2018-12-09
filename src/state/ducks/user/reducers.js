@@ -1,8 +1,8 @@
-import * as types from '../constants/ActionTypes';
+import * as types from "./types";
 
 const initialState = null;
 
-export default function(state = initialState, action) {
+const userReducer = function(state = initialState, action) {
     switch (action.type) {
 
         case types.USER_SIGNED_IN:
@@ -14,4 +14,6 @@ export default function(state = initialState, action) {
         default:
             return state;
     } 
-};
+}
+
+export default userReducer;

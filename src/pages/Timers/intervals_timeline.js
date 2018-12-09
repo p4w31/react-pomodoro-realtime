@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import Timeline from 'react-visjs-timeline';
 import LoadingBars from '../../components/loading_bars';
-import getIntervals from '../../selectors/IntervalsSelectors';
+import { intervalsSelectors } from '../../state/ducks/intervals';
 import PropTypes from 'prop-types';
 
 import './intervals_timeline.scss';
@@ -85,7 +85,7 @@ class IntervalsTimeline extends Component {
 
 function mapStateToProps(state) {
     return {
-        intervals: getIntervals(state)
+        intervals: intervalsSelectors.getIntervals(state)
     };
 }
 

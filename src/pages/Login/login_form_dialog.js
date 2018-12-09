@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
 import ModalError from '../../components/modal_error';
-import { signInWithEmailAndPassword, verifyAuth } from '../../actions/UserActions.js';
+import { userActions } from '../../state/ducks/user';
 import PropTypes from 'prop-types';
 
 import './login_form_dialog.scss';
@@ -97,8 +97,8 @@ class LoginFormDialog extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators ({
-        signInWithEmailAndPassword,
-        verifyAuth,
+        signInWithEmailAndPassword: userActions.signInWithEmailAndPassword,
+        verifyAuth: userActions.verifyAuth,
     }, dispatch);
 }
 

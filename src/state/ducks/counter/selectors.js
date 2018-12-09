@@ -1,0 +1,1 @@
+export const getCounterDetails = (state) => state.counterDetails

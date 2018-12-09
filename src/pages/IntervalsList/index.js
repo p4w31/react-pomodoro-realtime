@@ -4,7 +4,7 @@ import moment from 'moment';
 import withAuthorization from '../../components/with_authorization';
 import AddRow from './add_row';
 import ItemsList from './items_list';
-import getUser from '../../selectors/UserSelectors';
+import { userSelectors } from '../../state/ducks/user';
 import PropTypes from 'prop-types';
 
 import './index.scss';
@@ -43,7 +43,7 @@ class IntervalsListPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: getUser(state),
+        user: userSelectors.getUser(state)
     };
 }
 

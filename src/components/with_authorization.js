@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { verifyAuth } from '../actions/UserActions';
+import { userActions, userSelectors } from '../state/ducks/user';
 import LoadingSpinner from './loading_spinner';
-import getUser from '../selectors/UserSelectors';
 import PropTypes from 'prop-types';
 
 const withAuthorization = (WrappedComponent) => {
@@ -35,13 +34,13 @@ const withAuthorization = (WrappedComponent) => {
 
     function mapStateToProps(state) {
         return {
-            user: getUser(state)
+            user: userSelectors.getUser(state)
         };
     }
 
     function mapDispatchToProps(dispatch) {
         return bindActionCreators({
-            verifyAuth
+            verifyAuth: userActions.verifyAuth
         }, dispatch);
     }
 

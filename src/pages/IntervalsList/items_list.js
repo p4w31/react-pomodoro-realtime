@@ -6,8 +6,7 @@ import moment from 'moment';
 import LoadingBars from '../../components/loading_bars';
 import ModalError from '../../components/modal_error';
 import EditableItemTitle from './editable_item_title';
-import { removeIntervalByDate, fetchIntervalsOnceByDate } from '../../actions/IntervalsActions.js';
-import getIntervals from '../../selectors/IntervalsSelectors';
+import { intervalsActions, intervalsSelectors } from '../../state/ducks/intervals';
 import PropTypes from 'prop-types';
 
 import './items_list.scss';
@@ -97,14 +96,14 @@ class ItemsList extends Component{
 
 function mapStateToProps(state) {
     return {
-        intervals: getIntervals(state),
+        intervals: intervalsSelectors.getIntervals(state),
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        removeIntervalByDate,
-        fetchIntervalsOnceByDate
+        removeIntervalByDate: intervalsActions.removeIntervalByDate,
+        fetchIntervalsOnceByDate: intervalsActions.fetchIntervalsOnceByDate
     }, dispatch);
 }
 

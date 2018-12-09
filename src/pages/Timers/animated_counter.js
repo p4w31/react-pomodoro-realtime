@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setCounterDetailsType } from '../../actions/CounterActions';
-import { addInterval } from '../../actions/IntervalsActions.js';
+import { counterActions, counterSelectors } from '../../state/ducks/counter';
+import { intervalsActions } from '../../state/ducks/intervals';
 import ModalError from '../../components/modal_error';
-import getCounterDetails from '../../selectors/CounterSelectors';
 import PropTypes from 'prop-types';
 
 import './animated_counter.scss';
@@ -166,14 +165,14 @@ class AnimatedCounter extends Component {
 
 function mapStateToProps(state) {
     return {
-        counterDetails: getCounterDetails(state)
+        counterDetails: counterSelectors.getCounterDetails(state)
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        setCounterDetailsType,
-        addInterval,
+        setCounterDetailsType: counterActions.setCounterDetailsType,
+        addInterval: intervalsActions.addInterval,
     }, dispatch);
 }
 

@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import * as types from '../constants/ActionTypes';
+import * as types from './types';
 
 export function signInWithEmailAndPassword(email, password) {
     return function(dispatch) {

@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes';
+import * as types from './types';
 
 export function setCounterDetails(countdownTime, countdownStart, countdownStop, type, flag) {
     return {

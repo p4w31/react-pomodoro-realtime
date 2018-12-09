@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import { setCounterDetails } from '../../actions/CounterActions';
-import { addInterval } from '../../actions/IntervalsActions';
+import { counterActions, counterSelectors } from '../../state/ducks/counter';
+import { intervalsActions } from '../../state/ducks/intervals';
 import moment from 'moment';
 import ModalError from '../../components/modal_error';
-import getCounterDetails from '../../selectors/CounterSelectors';
 import PropTypes from 'prop-types';
 
 import './counter_buttons.scss';
@@ -218,14 +217,14 @@ class CounterButtons extends Component {
 
 function mapStateToProps(state) {
     return {
-        counterDetails: getCounterDetails(state),
+        counterDetails: counterSelectors.getCounterDetails(state),
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ 
-        setCounterDetails: setCounterDetails,
-        addInterval: addInterval
+        setCounterDetails: counterActions.setCounterDetails,
+        addInterval: intervalsActions.addInterval
     }, dispatch);
 }
 

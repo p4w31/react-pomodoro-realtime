@@ -1,6 +1,6 @@
-import { databaseRef, intervalsRef } from "../config/firebase";
+import { databaseRef, intervalsRef } from "../../../config/firebase";
 import moment from 'moment';
-import * as types from '../constants/ActionTypes';
+import * as types from './types';
 
 export function removeIntervalByDate(intervalId, date) {
     return function(dispatch, getState) {

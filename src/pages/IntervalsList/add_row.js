@@ -3,9 +3,10 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FormGroup, Label, Input } from 'reactstrap';
-import { addInterval } from '../../actions/IntervalsActions';
+//import { addInterval } from '../../actions/IntervalsActions';
+import { intervalsActions } from '../../state/ducks/intervals';
 import ModalError from '../../components/modal_error';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; 
 
 import './add_row.scss';
 
@@ -129,7 +130,7 @@ class AddRow extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        addInterval: addInterval
+        addInterval: intervalsActions.addInterval
     }, dispatch);
 }
 

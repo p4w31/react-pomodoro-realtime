@@ -1,10 +1,10 @@
-import * as types from '../constants/ActionTypes';
+import * as types from "./types";
 
 const defaultState = {
     flag: 'not_started'
 };
 
-export default function(state = defaultState, action) {
+const counterReducer = function(state = defaultState, action) {
     switch(action.type) {
         case types.CHANGE_COUNTER_DETAILS:
             return action.payload
@@ -19,3 +19,5 @@ export default function(state = defaultState, action) {
             return state
     }
 }
+
+export default counterReducer;
