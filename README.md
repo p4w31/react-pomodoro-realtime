@@ -7,6 +7,8 @@ https://react-pomodoro-realtime.herokuapp.com
 
 * App tracks time for pomodoro periods 
 
+![timer](https://raw.githubusercontent.com/p4w31/react-pomodoro-realtime/master/src/pomodoro-timer.jpg)
+
 ## TODO
 * add tests
 * better work-break flow
