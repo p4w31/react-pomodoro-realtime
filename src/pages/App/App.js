@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import './app.scss';
 import withAuthentication from '../../components/withAuthentication';
 import MenuTop from './MenuTop';
 
@@ -29,7 +28,7 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <div className="App">
+                <div className="App" style={{ padding: '5px'}}>
                     <MenuTop />
 
                     <Switch>

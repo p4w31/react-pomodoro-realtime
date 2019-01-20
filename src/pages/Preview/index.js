@@ -6,7 +6,7 @@ import withAuthorization from '../../components/withAuthorization';
 import PropTypes from 'prop-types';
 import { trackedUsersActions, trackedUsersSelectors } from '../../state/ducks/trackedUsers';
 import LoadingBars from '../../components/LoadingBars';
-import TrackedUser from './TrackedUser';
+import TrackedUser from './TrackedUser2';
 
 import './index.scss';
 
