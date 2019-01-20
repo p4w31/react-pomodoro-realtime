@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
-import ModalError from '../../components/modal_error';
+import ModalError from '../../components/ModalError';
 import { userActions } from '../../state/ducks/user';
 import PropTypes from 'prop-types';
 
-import './login_form_dialog.scss';
+import './loginFormDialog.scss';
 
 const defaultProps = {};
   

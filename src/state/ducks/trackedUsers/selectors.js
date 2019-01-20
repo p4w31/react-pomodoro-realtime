@@ -1,0 +1,1 @@
+export const getTrackedUsers = (state) => state.trackedUsers

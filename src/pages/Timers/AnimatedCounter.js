@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { counterActions, counterSelectors } from '../../state/ducks/counter';
 import { intervalsActions } from '../../state/ducks/intervals';
-import ModalError from '../../components/modal_error';
+import ModalError from '../../components/ModalError';
 import PropTypes from 'prop-types';
 
-import './animated_counter.scss';
+import './animatedCounter.scss';
 
 const defaultProps = {};
   

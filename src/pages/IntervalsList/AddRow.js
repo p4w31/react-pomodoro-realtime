@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 import { FormGroup, Label, Input } from 'reactstrap';
 //import { addInterval } from '../../actions/IntervalsActions';
 import { intervalsActions } from '../../state/ducks/intervals';
-import ModalError from '../../components/modal_error';
+import ModalError from '../../components/ModalError';
 import PropTypes from 'prop-types'; 
 
-import './add_row.scss';
+import './addRow.scss';
 
 const defaultProps = {};
   
@@ -49,14 +49,14 @@ class AddRow extends Component {
         if (this.state.inputNewTaskStartTimestamp
             && this.state.inputNewTaskStopTimestamp
             && this.state.selectType !=='select') {
-            this.props.addInterval({
-                start: this.state.inputNewTaskStartTimestamp,
-                stop: this.state.inputNewTaskStopTimestamp,
-                type: this.state.selectType
-            })
-                .then((data) => {
-                    this.clearNewTaskInputs();
-                });
+                this.props.addInterval({
+                    start: this.state.inputNewTaskStartTimestamp,
+                    stop: this.state.inputNewTaskStopTimestamp,
+                    type: this.state.selectType
+                })
+                    .then((data) => {
+                        this.clearNewTaskInputs();
+                    });
         } else {
             this.toggleError();
         }

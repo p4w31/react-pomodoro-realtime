@@ -6,7 +6,7 @@ import './modal.scss';
 
 const defaultProps = {
     message: 'Error',
-  };
+};
   
 const propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -15,12 +15,18 @@ const propTypes = {
 };
 
 function ModalError(props) {
+    const {
+        isOpen,
+        toggle,
+        message
+    } = props;
+
     return (
-        <Modal isOpen={props.isOpen} toggle={props.toggle} message={props.message} centered={true}>
+        <Modal isOpen={isOpen} toggle={toggle} message={message} centered={true}>
             <ModalBody>
-                {props.message}
+                {message}
                 <div>
-                    <button onClick={props.toggle}>OK</button>
+                    <button onClick={toggle}>OK</button>
                 </div>
             </ModalBody>
         </Modal>

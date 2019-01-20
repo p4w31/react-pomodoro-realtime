@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { userActions, userSelectors } from '../state/ducks/user';
-import LoadingSpinner from './loading_spinner';
+import { userActions, userSelectors } from '../../state/ducks/user';
+import LoadingSpinner from '../LoadingSpinner';
 import PropTypes from 'prop-types';
 
 const withAuthorization = (WrappedComponent) => {

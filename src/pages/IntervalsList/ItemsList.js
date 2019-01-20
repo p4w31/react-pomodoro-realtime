@@ -3,20 +3,20 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
-import LoadingBars from '../../components/loading_bars';
-import ModalError from '../../components/modal_error';
-import EditableItemTitle from './editable_item_title';
+import LoadingBars from '../../components/LoadingBars';
+import ModalError from '../../components/ModalError';
+import EditableItemTitle from './EditableItemTitle';
 import { intervalsActions, intervalsSelectors } from '../../state/ducks/intervals';
 import PropTypes from 'prop-types';
 
-import './items_list.scss';
+import './itemsList.scss';
 
 const defaultProps = {};
   
 const propTypes = {
     intervals: PropTypes.object,
     removeIntervalByDate: PropTypes.func,
-    fetchIntervalsOnceByDate: PropTypes.func,
+    fetchIntervalsOnceByDateCurrentUser: PropTypes.func,
 };
 
 class ItemsList extends Component{
@@ -32,7 +32,7 @@ class ItemsList extends Component{
     }
 
     componentDidMount() {
-        this.props.fetchIntervalsOnceByDate( this.state.currentDay );
+        this.props.fetchIntervalsOnceByDateCurrentUser( this.state.currentDay );
     }
 
     toggleError = (event) => {
@@ -69,6 +69,10 @@ class ItemsList extends Component{
     }
 
     render() {
+        const {
+            intervals,
+        } = this.props;
+
         return (
             <div className="items-list-wrapper">
                 <table>
@@ -81,7 +85,7 @@ class ItemsList extends Component{
                         </tr>
                     </thead>
                     <tbody>
-                        { (this.props.intervals.loading) 
+                        { (intervals.loading) 
                             ? <tr><td colSpan="3"><LoadingBars /></td></tr>
                             : this.displayItems()
                         }
@@ -103,7 +107,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         removeIntervalByDate: intervalsActions.removeIntervalByDate,
-        fetchIntervalsOnceByDate: intervalsActions.fetchIntervalsOnceByDate
+        fetchIntervalsOnceByDateCurrentUser: intervalsActions.fetchIntervalsOnceByDateCurrentUser
     }, dispatch);
 }
 

@@ -1,6 +1,7 @@
 import { databaseRef, intervalsRef } from "../../../config/firebase";
 import moment from 'moment';
 import * as types from './types';
+import { trackedUsersActions } from '../trackedUsers';
 
 export function removeIntervalByDate(intervalId, date) {
     return function(dispatch, getState) {
@@ -18,7 +19,7 @@ export function removeIntervalByDate(intervalId, date) {
                             reject(err);
                         } else {
                             resolve();
-                            dispatch(fetchIntervalsOnceByDate(currentDay));
+                            dispatch(fetchIntervalsOnceByDateCurrentUser(currentDay));
                         }
                     }
                 );
@@ -49,7 +50,7 @@ export function fetchIntervals() {
     }
 }
 
-export function fetchIntervalsOnceByDate(date) {
+export function fetchIntervalsOnceByDateCurrentUser(date) {
     return function(dispatch, getState) {
         dispatch(fetchIntervalsBegin());
         let userUid = (getState().user) ? getState().user.uid : null;
@@ -61,6 +62,35 @@ export function fetchIntervalsOnceByDate(date) {
                 payload: snapshot.val()
             });
         });
+    }
+}
+
+export function fetchIntervalsOnceByDateAndUid(date, uid) {
+    return function(dispatch, getState) {
+        return new Promise((resolve, reject) => {
+            let userintervalsRef = databaseRef.child(`intervals/${uid}/${date}`);
+
+            userintervalsRef.once("value", snapshot => {
+                resolve(snapshot.val());
+            });
+        })
+        
+    }
+}
+
+export function fetchIntervalsOnceByDateAllUsers(date) {
+    return function(dispatch, getState) {
+        dispatch(trackedUsersActions.fetchTrackedUsers())
+            .then(() => {
+                getState().trackedUsers.items.forEach(({uid}) => {
+                    dispatch(fetchIntervalsOnceByDateAndUid(date, uid));
+                });
+
+            })
+            .catch((err) => {
+                console.log('err');
+                console.log(err);
+            });
     }
 }
 
@@ -85,7 +115,7 @@ export function addInterval(newInterval, date){
                             reject(err);
                         } else {
                             resolve();
-                            dispatch(fetchIntervalsOnceByDate(currentDay));
+                            dispatch(fetchIntervalsOnceByDateCurrentUser(currentDay));
                         }
                     }
                 );

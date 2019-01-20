@@ -6,13 +6,14 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import './menu_top.scss';
+import './menuTop.scss';
 
 const defaultProps = {};
   
 const propTypes = {
     user: PropTypes.object,
     signOut: PropTypes.func,
+    history: PropTypes.object,
 };
 
 class MenuTop extends Component {
@@ -41,6 +42,9 @@ class MenuTop extends Component {
                 <span className="menu-link" onClick={ () => this.redirectTo('list') }>
                     List
                 </span>
+                <span className="menu-link" onClick={ () => this.redirectTo('preview') }>
+                    Preview
+                </span>
                 <span className="menu-link logout" onClick={ this.logout }>
                     Logout
                 </span>
@@ -52,8 +56,12 @@ class MenuTop extends Component {
     }
 
     render() {
+        const {
+            user,
+        } = this.props;
+
         return (
-            ( this.props.user )
+            ( user )
                 ? this.renderMenu()
                 : null
         );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { userActions } from '../state/ducks/user';
+import { userActions } from '../../state/ducks/user';
 import { bindActionCreators } from 'redux';
 import * as firebase from "firebase";
 import PropTypes from 'prop-types';

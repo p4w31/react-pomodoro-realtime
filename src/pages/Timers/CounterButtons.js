@@ -5,10 +5,11 @@ import _ from 'lodash';
 import { counterActions, counterSelectors } from '../../state/ducks/counter';
 import { intervalsActions } from '../../state/ducks/intervals';
 import moment from 'moment';
-import ModalError from '../../components/modal_error';
+import ModalError from '../../components/ModalError';
 import PropTypes from 'prop-types';
+import { buttonsWorkStructure, buttonsBreakStructure } from './buttonsStructure';
 
-import './counter_buttons.scss';
+import './counterButtons.scss';
 
 const defaultProps = {};
   
@@ -29,58 +30,8 @@ class CounterButtons extends Component {
             lastCountdownType: null,
             shouldChangeButtons: true,
             modalError: false,
-            buttonsWork: [
-                {
-                    label: '25m',
-                    value: 1500,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '30m',
-                    value: 1800,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '40m',
-                    value: 2400,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '1h',
-                    value: 3600,
-                    active: false,
-                    disabled: false
-                }
-            ],
-            buttonsBreak: [
-                {
-                    label: '5m',
-                    value: 300,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '10m',
-                    value: 600,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '15m',
-                    value: 900,
-                    active: false,
-                    disabled: false
-                },
-                {
-                    label: '1,5h',
-                    value: 5400,
-                    active: false,
-                    disabled: false
-                }
-            ]
+            buttonsWork: buttonsWorkStructure,
+            buttonsBreak: buttonsBreakStructure 
         };
     }
 
@@ -114,7 +65,7 @@ class CounterButtons extends Component {
         })
             .then(() => {
                 /**
-                 * TODO: add success info in popup
+                 * TODO: add success info in Alert
                  */
             })
             .catch((err) => {
@@ -126,7 +77,7 @@ class CounterButtons extends Component {
     setButtons = () => {
         const shouldBeDisabled = () => {
             if (this.props.counterDetails.flag==="started" ||
-            this.props.counterDetails.flag==="in_progress") {
+                this.props.counterDetails.flag==="in_progress") {
                 return true;
             } else {
                 return false;
@@ -136,17 +87,19 @@ class CounterButtons extends Component {
         if (this.props.counterDetails.countdownTime > 0) {
 
             let currentTime = this.props.counterDetails.countdownTime;
+            let currentType = this.props.counterDetails.type;
+
             let newButtonsWork = _.map(this.state.buttonsWork, (button) => {
-                return (button.value === currentTime)
+                return (button.value === currentTime) && (currentType === 'work')
                     ? { ...button, active: true, disabled: shouldBeDisabled() }
                     : { ...button, active: false, disabled: shouldBeDisabled() }
-            } )
+            })
 
             let newButtonsBreak = _.map(this.state.buttonsBreak, (button) => {
-                return (button.value === currentTime)
+                return (button.value === currentTime) && (currentType === 'break')
                     ? { ...button, active: true, disabled: shouldBeDisabled() }
                     : { ...button, active: false, disabled: shouldBeDisabled() }
-            } )
+            })
 
             this.setState({ buttonsBreak: newButtonsBreak, buttonsWork: newButtonsWork });
         }
@@ -171,6 +124,10 @@ class CounterButtons extends Component {
     }
 
     render () {
+        const {
+            counterDetails,
+        } = this.props;
+
         return (
             <div className="counter-with-buttons-wrapper">
 
@@ -202,14 +159,13 @@ class CounterButtons extends Component {
 
                 <div className="col-100-percent">
                     <button onClick={() => this.manualStop('work')} 
-                        disabled={this.props.counterDetails.flag==="not_started" || 
-                        this.props.counterDetails.flag==="finished"}>
+                        disabled={counterDetails.flag==="not_started" || 
+                        counterDetails.flag==="finished"}>
                         STOP
                     </button>
-                    
                 </div>
-                <ModalError isOpen={this.state.modalError} toggle={this.toggleError} message="Can't add interval."/>
 
+                <ModalError isOpen={this.state.modalError} toggle={this.toggleError} message="Can't add interval."/>
             </div>
         );
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import withAuthorization from '../../components/with_authorization';
-import AddRow from './add_row';
-import ItemsList from './items_list';
+import withAuthorization from '../../components/withAuthorization';
+import AddRow from './AddRow';
+import ItemsList from './ItemsList';
 import { userSelectors } from '../../state/ducks/user';
 import PropTypes from 'prop-types';
 
@@ -30,10 +30,14 @@ class IntervalsListPage extends Component {
     }
 
     render() {
+        const {
+            user
+        } = this.props;
+
         return (
             <div className="intervals-list-page-wrapper">
                 <h4>Intervals list</h4>
-                <h6>{(this.props.user ? this.props.user.email : 'no user')}</h6>
+                <h6>{(user ? user.email : 'no user')}</h6>
                 <AddRow />
                 <ItemsList /> 
             </div>

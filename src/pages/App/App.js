@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import './App.scss';
-import withAuthentication from '../../components/with_authentication';
-import MenuTop from './menu_top';
+import './app.scss';
+import withAuthentication from '../../components/withAuthentication';
+import MenuTop from './MenuTop';
 
 import IntervalsListPage from '../IntervalsList';
 import LoginPage from '../Login';
 import TimersPage from '../Timers'; 
+import PreviewPage from '../Preview'; 
 
 class App extends Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class App extends Component {
                     <MenuTop />
 
                     <Switch>
+                        <Route path="/preview" component={ PreviewPage } />
                         <Route path="/list" component={ IntervalsListPage } />
                         <Route path="/login" component={ LoginPage } />
                         <Route path="/timers" component={ TimersPage } />

@@ -1,11 +1,31 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+
+const defaultProps = {};
+  
+const propTypes = {
+    item: PropTypes.shape({
+        key: PropTypes.string,
+        data: PropTypes.shape({
+            start: PropTypes.number,
+            stop: PropTypes.number,
+            type: PropTypes.string
+        })
+    }),
+    removeInterval: PropTypes.func,
+};
 
 function parseTimestamp(timestamp) {
     return moment.unix(timestamp).format("YYYY-MM-DD H:mm:ss Z");
 }
 
-function EditableItemTitle({item, removeInterval}) {
+function EditableItemTitle(props) {
+    const {
+        item,
+        removeInterval
+    } = props;
+
     return (
         <tr>
             <td>
@@ -26,5 +46,8 @@ function EditableItemTitle({item, removeInterval}) {
         </tr>
     );
 }
+
+EditableItemTitle.defaultProps = defaultProps;
+EditableItemTitle.propTypes = propTypes;
 
 export default EditableItemTitle;

@@ -1,7 +1,7 @@
 import React from 'react';
-import './loading_bars.scss';
+import './loadingBars.scss';
 
-function LoadingBars(props) {
+function LoadingBars() {
     return (
         <div className="loading-bars-wrapper">
             <div className="blocks-wrapper">
