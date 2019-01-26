@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import './loginFormDialog.scss';
 
 const defaultProps = {};
-  
+
 const propTypes = {
     signInWithEmailAndPassword: PropTypes.func,
     verifyAuth: PropTypes.func,
@@ -19,14 +19,16 @@ const propTypes = {
 };
 
 class LoginFormDialog extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
             inputUser: '',
             inputPassword: '',
-            modalError: false 
+            modalError: false
         };
+
+        //this.login = this.login.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +49,8 @@ class LoginFormDialog extends Component {
         });
     }
 
-    login = (event) => { 
+    login = (event) => {
+    //login(event) {
         event.preventDefault();
 
         this.props.signInWithEmailAndPassword(this.state.inputUser, this.state.inputPassword)
@@ -55,7 +58,7 @@ class LoginFormDialog extends Component {
                 this.props.history.push('/timers');
             })
             .catch((err) => {
-                this.toggleError(); 
+                this.toggleError();
             });
     }
 
@@ -64,39 +67,45 @@ class LoginFormDialog extends Component {
     }
 
     render() {
-        return(
-            <form className="login-form-dialog-wrapper" onSubmit={ this.login }>
+        return (
+            <form className="login-form-dialog-wrapper"
+                onSubmit={this.login}
+                data-test="login-form-dialog-component"
+            >
                 <div>
                     <label htmlFor="email" >Email</label>
                     <input id="email"
-                        value={ this.state.inputUser } 
-                        onChange={ this.inputUserChange } 
-                        type="text" 
-                        placeholder="Email" 
+                        value={this.state.inputUser}
+                        onChange={this.inputUserChange}
+                        type="text"
+                        placeholder="Email"
                     />
                 </div>
                 <div>
                     <label htmlFor="password" >Password</label>
                     <input id="password"
-                        value={ this.state.inputPassword } 
-                        onChange={ this.inputPasswordChange } 
-                        type="password" 
-                        placeholder="Password" 
+                        value={this.state.inputPassword}
+                        onChange={this.inputPasswordChange}
+                        type="password"
+                        placeholder="Password"
                     />
                 </div>
                 <div>
                     <button type="submit">Login</button>
                 </div>
 
-                <ModalError isOpen={this.state.modalError} toggle={this.toggleError} message="Wrong user or password"/>
-
+                <ModalError 
+                    isOpen={this.state.modalError} 
+                    toggle={this.toggleError} 
+                    message="Wrong user or password" 
+                />
             </form>
         );
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators ({
+    return bindActionCreators({
         signInWithEmailAndPassword: userActions.signInWithEmailAndPassword,
         verifyAuth: userActions.verifyAuth,
     }, dispatch);
@@ -104,5 +113,7 @@ function mapDispatchToProps(dispatch) {
 
 LoginFormDialog.defaultProps = defaultProps;
 LoginFormDialog.propTypes = propTypes;
+
+export { LoginFormDialog };
 
 export default connect(null, mapDispatchToProps)(withRouter(LoginFormDialog));

@@ -60,7 +60,6 @@ class AddRow extends Component {
         } else {
             this.toggleError();
         }
-        
     }
 
     inputNewTaskStartChange = (event) => {
@@ -95,10 +94,10 @@ class AddRow extends Component {
 
     render() {
         return (
-            <div className="add-row-wrapper">
+            <div className="add-row-wrapper" data-test="add-row-component">
                 <FormGroup>
                     <Label for="start">Start</Label>
-                    <Input type="time" name="start" id="start" 
+                    <Input type="time" name="start" id="start"
                         value={ this.state.inputNewTaskStart } 
                         onChange={ this.inputNewTaskStartChange } />
                 </FormGroup>
@@ -120,7 +119,7 @@ class AddRow extends Component {
                     </Input>
                 </FormGroup>
                 
-                <button onClick={ this.addInterval }>ADD</button>
+                <button onClick={ this.addInterval } data-test="add-row-btn">ADD</button>
 
                 <ModalError isOpen={this.state.modalError} toggle={this.toggleError} message="You must fill in all of the fields"/>
             </div>
@@ -136,5 +135,7 @@ function mapDispatchToProps(dispatch) {
 
 AddRow.defaultProps = defaultProps;
 AddRow.propTypes = propTypes;
+
+export { AddRow };
 
 export default connect(null, mapDispatchToProps)(AddRow);

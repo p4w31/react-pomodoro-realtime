@@ -54,10 +54,11 @@ class IntervalsTimeline extends Component {
         ];
 
         this.parsedIntervals = [];
-
+        
+        this.parseIntervals = this.parseIntervals.bind(this);
     }
     
-    parseIntervals = (intervals) => {
+    parseIntervals(intervals) {
         this.parsedIntervals = _.map(intervals, (item) => ({
             start: moment.unix(item.data.start).format(),
             end: moment.unix(item.data.stop).format(),
@@ -74,7 +75,7 @@ class IntervalsTimeline extends Component {
         } = this.props;
 
         return (
-            <div className="intervals-timeline-wrapper">
+            <div className="intervals-timeline-wrapper" data-test="intervals-timeline-component">
                 { ( this.parseIntervals( intervals ) )
                     && <Timeline
                         ref={ this.timelineWrapperRef }

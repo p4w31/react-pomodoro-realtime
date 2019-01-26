@@ -63,7 +63,7 @@ class ItemsList extends Component{
                 />
             ));
         } else {
-            return <tr><td colSpan="3">no intervals</td></tr>
+            return <tr><td colSpan="3" data-test="no-intervals-msg">no intervals</td></tr>
         }
         
     }
@@ -74,7 +74,7 @@ class ItemsList extends Component{
         } = this.props;
 
         return (
-            <div className="items-list-wrapper">
+            <div className="items-list-wrapper" data-test="items-list-component">
                 <table>
                     <thead>
                         <tr>
@@ -113,5 +113,7 @@ function mapDispatchToProps(dispatch) {
 
 ItemsList.defaultProps = defaultProps;
 ItemsList.propTypes = propTypes;
+
+export { ItemsList };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemsList);

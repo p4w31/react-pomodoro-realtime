@@ -35,9 +35,9 @@ class IntervalsListPage extends Component {
         } = this.props;
 
         return (
-            <div className="intervals-list-page-wrapper">
+            <div className="intervals-list-page-wrapper" data-test="intervals-list-page-component">
                 <h4>Intervals list</h4>
-                <h6>{(user ? user.email : 'no user')}</h6>
+                <h6>{(user ? user.email : 'no user email')}</h6>
                 <AddRow />
                 <ItemsList /> 
             </div>
@@ -53,5 +53,7 @@ function mapStateToProps(state) {
 
 IntervalsListPage.defaultProps = defaultProps;
 IntervalsListPage.propTypes = propTypes;
+
+export { IntervalsListPage };
 
 export default connect(mapStateToProps)(withAuthorization(IntervalsListPage));

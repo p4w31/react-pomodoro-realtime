@@ -10,10 +10,17 @@ import TrackedUser from './TrackedUser2';
 
 import './index.scss';
 
+/**
+ * todo: finish PropTypes
+ */
+
 const defaultProps = {};
-  
+
 const propTypes = {
-    user: PropTypes.object,
+    trackedUsers: PropTypes.shape({
+        items: PropTypes.array,
+        loading: PropTypes.bool
+    })
 };
 
 class PreviewPage extends Component {
@@ -27,7 +34,7 @@ class PreviewPage extends Component {
 
     displayTrackedUsers = () => {
         return this.props.trackedUsers.items.map((trackedUser) => (
-            <TrackedUser trackedUser={trackedUser} key={trackedUser.uid}/>
+            <TrackedUser trackedUser={trackedUser} key={trackedUser.uid} />
         ));
     }
 
@@ -41,9 +48,9 @@ class PreviewPage extends Component {
         } = this.props;
 
         return (
-            <div className="preview-page-wrapper">
+            <div className="preview-page-wrapper" data-test="preview-page-component">
                 <h4>Tracked users:</h4>
-                { (!trackedUsers.loading )
+                {(!trackedUsers.loading)
                     ? this.displayTrackedUsers()
                     : <LoadingBars />
                 }
@@ -66,5 +73,7 @@ function mapDispatchToProps(dispatch) {
 
 PreviewPage.defaultProps = defaultProps;
 PreviewPage.propTypes = propTypes;
+
+export { PreviewPage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthorization(PreviewPage));

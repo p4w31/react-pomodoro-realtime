@@ -35,7 +35,7 @@ class MenuTop extends Component {
 
     renderMenu = () => {
         return (
-            <div className="menu-top-wrapper">
+            <div className="menu-top-wrapper" data-test="menu-top-component">
                 <span className="menu-link" onClick={ () => this.redirectTo('timers') }>
                     Timers
                 </span>
@@ -48,7 +48,7 @@ class MenuTop extends Component {
                 <span className="menu-link logout" onClick={ this.logout }>
                     Logout
                 </span>
-                <span className="menu-link email" onClick={ () => this.redirectTo('list') }>
+                <span className="menu-link email">
                     [{ this.props.user.email }]
                 </span>
             </div>
@@ -83,6 +83,8 @@ function mapDispatchToProps(dispatch) {
 
 MenuTop.defaultProps = defaultProps;
 MenuTop.propTypes = propTypes;
+
+export { MenuTop };
 
 export default compose(
     withRouter,

@@ -27,12 +27,12 @@ function EditableItemTitle(props) {
     } = props;
 
     return (
-        <tr>
+        <tr data-test="editable-item-title-component">
             <td>
-                { parseTimestamp(item.data.start) } 
+                { parseTimestamp(item.data.start) }
             </td>
             <td>
-                { parseTimestamp(item.data.stop) } 
+                { parseTimestamp(item.data.stop) }
             </td>
             <td>
                 { item.data.type }

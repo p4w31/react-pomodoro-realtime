@@ -22,7 +22,7 @@ function ModalError(props) {
     } = props;
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} message={message} centered={true}>
+        <Modal isOpen={isOpen} toggle={toggle} message={message} centered={true} data-test="modal-error-component">
             <ModalBody>
                 {message}
                 <div>
