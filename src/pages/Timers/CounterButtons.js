@@ -17,7 +17,7 @@ const propTypes = {
     counterDetails: PropTypes.shape({
         flag: PropTypes.oneOf(['not_started', 'started', 'in_progress', 'finished'])
     }),
-    setCounterDetailsType: PropTypes.func,
+    setCounterDetails: PropTypes.func,
     addInterval: PropTypes.func,
 };
 
@@ -45,18 +45,26 @@ class CounterButtons extends Component {
         let startTime = moment().unix();
         let calculatedStopTime = moment().add(seconds, 'seconds').unix();
 
-        this.props.setCounterDetails(seconds, startTime, calculatedStopTime, activity, 'started');
+        this.props.setCounterDetails({
+            countdownTime: seconds, 
+            countdownStart: startTime, 
+            countdownStop: calculatedStopTime, 
+            type: activity, 
+            flag: 'started'
+        });
     }
 
     manualStop = () => {
         let currentTime = moment().unix();
         let duration = currentTime - this.props.counterDetails.countdownStart;
 
-        this.props.setCounterDetails(this.props.counterDetails.countdownTime, 
-            this.props.counterDetails.countdownStart, 
-            this.props.counterDetails.countdownStart + duration ,
-            this.props.counterDetails.type, 
-            'finished');
+        this.props.setCounterDetails({
+            countdownTime: this.props.counterDetails.countdownTime, 
+            countdownStart: this.props.counterDetails.countdownStart, 
+            countdownStop: this.props.counterDetails.countdownStart + duration ,
+            type: this.props.counterDetails.type, 
+            flag: 'finished'
+        });
 
         this.props.addInterval({
             start: this.props.counterDetails.countdownStart,

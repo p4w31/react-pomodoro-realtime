@@ -1,6 +1,6 @@
 import * as types from './types';
 
-export function setCounterDetails(countdownTime, countdownStart, countdownStop, type, flag) {
+export function setCounterDetails({countdownTime, countdownStart, countdownStop, type, flag}) {
     return {
         type: types.CHANGE_COUNTER_DETAILS,
         payload: {
@@ -19,12 +19,5 @@ export function setCounterDetailsType(flag) {
         payload: {
             flag
         }
-    };
-}
-
-export function addInterval(interval) {
-    return {
-        type: types.ADD_INTERVAL,
-        payload: interval
     };
 }
