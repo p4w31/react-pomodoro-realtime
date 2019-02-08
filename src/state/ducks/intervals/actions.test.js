@@ -75,8 +75,6 @@ describe('Action removeIntervalByDate', () => {
     });
 
     it('resolves and calls dispatch when interval removed successfully', (done) => {
-        const stubFetchIntervalsOnceByDateCurrentUser = sinon
-            .stub(intervalsActions, 'fetchIntervalsOnceByDateCurrentUser');
         const stubSet = sinon.stub().resolves(false);
         sinon.stub(FirebaseReferences, 'getDatabaseRef').returns({
             child: sinon.stub().returns({ set: stubSet })
@@ -84,14 +82,12 @@ describe('Action removeIntervalByDate', () => {
 
         intervalsActions.removeIntervalByDate('test123', currentDay)(stubDispatch, stubGetState)
             .then(data => {
-                expect(stubFetchIntervalsOnceByDateCurrentUser.callCount).toEqual(1);
+                expect(stubDispatch.callCount).toEqual(1);
                 done();
             });
     });
 
     it('rejects and doesnt call dispatch when interval not removed', (done) => {
-        const stubFetchIntervalsOnceByDateCurrentUser = sinon
-            .stub(intervalsActions, 'fetchIntervalsOnceByDateCurrentUser');
         const stubSet = sinon.stub().resolves(true);
         sinon.stub(FirebaseReferences, 'getDatabaseRef').returns({
             child: sinon.stub().returns({ set: stubSet })
@@ -99,7 +95,7 @@ describe('Action removeIntervalByDate', () => {
 
         intervalsActions.removeIntervalByDate('test123')(stubDispatch, stubGetState)
             .catch(data => {
-                expect(stubFetchIntervalsOnceByDateCurrentUser.callCount).toEqual(0);
+                expect(stubDispatch.callCount).toEqual(0);
                 done();
             });
     });
