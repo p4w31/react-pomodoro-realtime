@@ -1,124 +1,91 @@
-import { databaseRef, intervalsRef } from "../../../config/firebase";
+import { FirebaseReferences } from "../../../config/firebase";
 import moment from 'moment';
 import * as types from './types';
-import { trackedUsersActions } from '../trackedUsers';
 
-export function removeIntervalByDate(intervalId, date) {
-    return function(dispatch, getState) {
-        return new Promise((resolve, reject) => {
-            let userUid = getState().user.uid;
-            let currentDay = moment().format('YYYY-MM-DD');
+const intervalsActions = {
+    removeIntervalByDate: function (intervalId, date) {
+        return function (dispatch, getState) {
+            return new Promise((resolve, reject) => {
+                const userUid = getState().user.uid;
+                const currentDay = moment().format('YYYY-MM-DD');
 
-            intervalsRef
-                .child(userUid)
-                .child(date)
-                .child(intervalId)
-                .set(null,
-                    (err) => {
+                FirebaseReferences.getDatabaseRef()
+                    .child(`intervals/${userUid}/${date}/${intervalId}`)
+                    .set(null)
+                    .then(err => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve();
-                            dispatch(fetchIntervalsOnceByDateCurrentUser(currentDay));
+                            dispatch(intervalsActions.fetchIntervalsOnceByDateCurrentUser(currentDay));
                         }
-                    }
-                );
-        });
-    }
-}
-
-export function toggleIntervalCompleted(intervalId) {
-    return {
-        type: types.TOGGLE_INTERVAL_COMPLETED,
-        payload: {
-            id: intervalId
+                    });
+            });
         }
-    };
-}
+    },
 
-export function fetchIntervals() {
-    return function(dispatch, getState) {
-        dispatch(fetchIntervalsBegin());
+    fetchIntervalsOnceByDateCurrentUser: function (date) {
+        return function (dispatch, getState) {
+            return new Promise((resolve, reject) => {
+                dispatch(intervalsActions.fetchIntervalsBegin());
+                let userUid = (getState().user) ? getState().user.uid : null;
+                let userIntervalsRef = FirebaseReferences.getDatabaseRef().child(`intervals/${userUid}/${date}`);
 
-        let userintervalsRef = databaseRef.child("intervals");
-        userintervalsRef.on("value", snapshot => {
-            dispatch({
-                type: types.FETCH_INTERVALS,
-                payload: snapshot.val()
-            });
-        });
-    }
-}
-
-export function fetchIntervalsOnceByDateCurrentUser(date) {
-    return function(dispatch, getState) {
-        dispatch(fetchIntervalsBegin());
-        let userUid = (getState().user) ? getState().user.uid : null;
-        let userintervalsRef = databaseRef.child(`intervals/${userUid}/${date}`);
-
-        userintervalsRef.once("value", snapshot => {
-            dispatch({
-                type: types.FETCH_INTERVALS,
-                payload: snapshot.val()
-            });
-        });
-    }
-}
-
-export function fetchIntervalsOnceByDateAndUid(date, uid) {
-    return function(dispatch, getState) {
-        return new Promise((resolve, reject) => {
-            let userintervalsRef = databaseRef.child(`intervals/${uid}/${date}`);
-
-            userintervalsRef.once("value", snapshot => {
-                resolve(snapshot.val());
-            });
-        })
-        
-    }
-}
-
-export function fetchIntervalsOnceByDateAllUsers(date) {
-    return function(dispatch, getState) {
-        dispatch(trackedUsersActions.fetchTrackedUsers())
-            .then(() => {
-                getState().trackedUsers.items.forEach(({uid}) => {
-                    dispatch(fetchIntervalsOnceByDateAndUid(date, uid));
-                });
-
+                userIntervalsRef.once("value")
+                    .then(snapshot => {
+                        dispatch({
+                            type: types.FETCH_INTERVALS,
+                            payload: snapshot.val()
+                        });
+                        resolve(snapshot.val());
+                    });
             })
-            .catch((err) => {
-                console.log('err');
-                console.log(err);
-            });
-    }
-}
+        }
+    },
 
-export const fetchIntervalsBegin = () => ({
-    type: types.FETCH_INTERVALS_BEGIN
-});
+    fetchIntervalsOnceByDateAndUid: function (date, uid) {
+        return function (dispatch, getState) {
+            return new Promise((resolve, reject) => {
+                let userIntervalsRef = FirebaseReferences
+                    .getDatabaseRef()
+                    .child(`intervals/${uid}/${date}`);
 
-export function addInterval(newInterval, date){
-    return function(dispatch, getState){
-        // API should add intervals in appropriate date keys; 
-        // for now interval is stored in stop day subcollection
-        return new Promise((resolve, reject) => {
-            let userUid = getState().user.uid;
-            let currentDay = moment().format('YYYY-MM-DD');
+                    userIntervalsRef.once("value")
+                    .then(snapshot => {
+                        resolve(snapshot.val());
+                    });
+            })
 
-            intervalsRef
-                .child(`${userUid}/${currentDay}`)
-                .push()
-                .set(newInterval, 
-                    (err) => {
+        }
+    },
+
+    fetchIntervalsBegin: function () {
+        return {
+            type: types.FETCH_INTERVALS_BEGIN
+        }
+    },
+
+    addInterval: function (newInterval, date) {
+        return function (dispatch, getState) {
+            return new Promise((resolve, reject) => {
+                let userUid = getState().user.uid;
+                let currentDay = moment().format('YYYY-MM-DD');
+
+                FirebaseReferences.getIntervalsRef()
+                    .child(`${userUid}/${currentDay}`)
+                    .push()
+                    .set(newInterval)
+                    .then(err => {
                         if (err) {
                             reject(err);
                         } else {
                             resolve();
-                            dispatch(fetchIntervalsOnceByDateCurrentUser(currentDay));
+                            dispatch(intervalsActions.fetchIntervalsOnceByDateCurrentUser(currentDay));
                         }
-                    }
-                );
-        });
+                    });
+            });
+        }
     }
 };
+
+export { intervalsActions };

@@ -1,6 +1,6 @@
 import reducer from "./reducers";
 
-import * as trackedUsersActions from "./actions";
+import { trackedUsersActions } from "./actions";
 import * as trackedUsersSelectors from "./selectors";
 
 export {

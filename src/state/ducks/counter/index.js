@@ -1,6 +1,6 @@
 import reducer from "./reducers";
 
-import * as counterActions from "./actions";
+import { counterActions } from "./actions";
 import * as counterSelectors from "./selectors";
 
 export {

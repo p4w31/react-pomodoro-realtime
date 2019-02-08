@@ -3,6 +3,16 @@ import { FirebaseConfig } from "./keys";
 
 firebase.initializeApp(FirebaseConfig);
 
-export const databaseRef = firebase.database().ref();
-export const intervalsRef = databaseRef.child("intervals");
+const FirebaseReferences = {
 
+    getDatabaseRef: function() {
+        return firebase.database().ref()
+    },
+
+    getIntervalsRef: function() {
+        return firebase.database().ref().child("intervals")
+    }
+
+};
+
+export { FirebaseReferences };

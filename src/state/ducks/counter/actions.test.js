@@ -1,4 +1,5 @@
-import { setCounterDetails, setCounterDetailsType } from './actions';
+//import { setCounterDetails, setCounterDetailsType } from './actions';
+import { counterActions } from './actions';
 import * as types from './types';
 
 describe('Action setCounterDetails', () => {
@@ -14,7 +15,7 @@ describe('Action setCounterDetails', () => {
             type:  types.CHANGE_COUNTER_DETAILS,
             payload: params
         }
-        const action = setCounterDetails(params);
+        const action = counterActions.setCounterDetails(params);
 
         expect(action).toEqual(expectedAction);
     });
@@ -27,7 +28,7 @@ describe('Action setCounterDetailsType', () => {
             type:  types.CHANGE_COUNTER_DETAILS_TYPE,
             payload: { flag: param }
         }
-        const action = setCounterDetailsType(param);
+        const action = counterActions.setCounterDetailsType(param);
 
         expect(action).toEqual(expectedAction);
     });
