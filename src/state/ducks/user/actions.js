@@ -1,39 +1,43 @@
 import * as firebase from "firebase";
 import * as types from './types';
 
-export function signInWithEmailAndPassword(email, password) {
-    return function(dispatch) {
-        return firebase.auth().signInWithEmailAndPassword(email, password);
-    }
-}
+const userActions = {
+    getFirebaseAuth: function () {
+        return firebase.auth()
+    },
 
-export function signOut() {
-    return function(dispatch) {
-        return firebase.auth().signOut();
-    }
-}
+    signInWithEmailAndPassword: function (email, password) {
+        return function (dispatch) {
+            return userActions.getFirebaseAuth().signInWithEmailAndPassword(email, password);
+        }
+    },
 
-export function userSignedIn(user) {
-    return {
-        type: types.USER_SIGNED_IN,
-        payload: { user: user }
-    }
-}
+    signOut: function () {
+        return function (dispatch) {
+            return userActions.getFirebaseAuth().signOut();
+        }
+    },
 
-export function userSignedOut() {
-    return { type: types.USER_SIGNED_OUT }
-}
+    userChanged: function (user) {
+        return {
+            type: types.USER_CHANGED,
+            payload: { user: user }
+        }
+    },
 
-export function verifyAuth() {
-    return function (dispatch) {
-        return new Promise((resolve, reject) => {
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    resolve(user);
-                } else {
-                    resolve(null);
-                }
+    verifyAuth: function () {
+        return function (dispatch) {
+            return new Promise((resolve, reject) => {
+                userActions.getFirebaseAuth().onAuthStateChanged(user => {
+                    if (user) {
+                        resolve(user);
+                    } else {
+                        resolve(null);
+                    }
+                });
             });
-        });
+        }
     }
-}
+};
+
+export { userActions };

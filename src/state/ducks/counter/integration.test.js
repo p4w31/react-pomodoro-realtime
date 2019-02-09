@@ -12,7 +12,7 @@ let initialState = {
     }
 };
 
-describe('Integration for counterDetails', () => {
+describe('Integration for counterDetails part of the store', () => {
     beforeEach(() => {
         store = storeFactory(initialState);
     });

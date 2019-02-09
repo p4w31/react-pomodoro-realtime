@@ -32,13 +32,6 @@ const intervalsReducer = function(state = initialState, action) {
                 loading: true
             };
 
-        case types.TOGGLE_INTERVAL_COMPLETED:
-            return _.map(state, (item) => {
-                return (item.id === action.payload.id)
-                    ? { ...item, completed: !item.completed }
-                    : item;
-            });
-
         default:
             return state;
     }

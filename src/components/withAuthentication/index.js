@@ -9,7 +9,7 @@ const withAuthentication = (WrappedComponent) => {
     const defaultProps = {};
       
     const propTypes = {
-        userSignedIn: PropTypes.func,
+        userChanged: PropTypes.func,
     };
 
     class WithAuthentication extends Component {
@@ -17,9 +17,9 @@ const withAuthentication = (WrappedComponent) => {
         componentDidMount() {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    this.props.userSignedIn(user);
+                    this.props.userChanged(user);
                 } else {
-                    this.props.userSignedIn(null);
+                    this.props.userChanged(null);
                 }
             });
         }
@@ -33,7 +33,7 @@ const withAuthentication = (WrappedComponent) => {
 
     function mapDispatchToProps(dispatch) {
         return bindActionCreators({
-            userSignedIn: userActions.userSignedIn,
+            userChanged: userActions.userChanged,
         }, dispatch);
     }
 

@@ -1,15 +1,12 @@
 import * as types from "./types";
 
-const initialState = null;
+const defaultState = null;
 
-const userReducer = function(state = initialState, action) {
+const userReducer = function(state = defaultState, action) {
     switch (action.type) {
 
-        case types.USER_SIGNED_IN:
+        case types.USER_CHANGED:
             return action.payload.user;
-
-        case types.USER_SIGNED_OUT:
-            return null;
 
         default:
             return state;
