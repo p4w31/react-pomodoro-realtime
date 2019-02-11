@@ -8,6 +8,11 @@ export const fetchTrackedUsersBegin = () => ({
 
 const trackedUsersActions = {
 
+    /**
+     * TODO: 
+     * - refactor to be more readable and easy for unit testing
+     * - add unit tests
+     */
     fetchTrackedUsers: function (date) {
         return function (dispatch, getState) {
             dispatch(fetchTrackedUsersBegin());

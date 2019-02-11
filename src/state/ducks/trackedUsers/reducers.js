@@ -1,5 +1,9 @@
 import * as types from "./types";
 
+/**
+ * TODO: add unit tests
+ */
+
 const initialState = {
     items: [],
     loading: false
