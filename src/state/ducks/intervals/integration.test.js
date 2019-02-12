@@ -28,11 +28,15 @@ let initialState = {
 
 describe('Integration for intervals part of the store', () => {
     beforeEach(() => {
+        //given
         store = storeFactory(initialState);
     });
 
     it('fetchIntervalsBegin action dispatcher', () => {
+        //when
         store.dispatch( intervalsActions.fetchIntervalsBegin() );
+
+        //then
         expect( store.getState().intervals ).toEqual({
             ...initialState.intervals,
             loading: true

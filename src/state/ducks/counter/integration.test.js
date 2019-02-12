@@ -14,10 +14,12 @@ let initialState = {
 
 describe('Integration for counterDetails part of the store', () => {
     beforeEach(() => {
+        //given
         store = storeFactory(initialState);
     });
 
     it('setCounterDetails action dispatcher', () => {
+        //given
         const params = {
             countdownTime: 3000,
             countdownStart: 1548519926,
@@ -25,14 +27,19 @@ describe('Integration for counterDetails part of the store', () => {
             type: 'break',
             flag: 'started'
         };
+
+        //when
         store.dispatch( counterActions.setCounterDetails(params) );
 
+        //then
         expect( store.getState().counterDetails ).toEqual(params);
     });
 
     it('setCounterDetailsType action dispatcher', () => {
+        //when
         store.dispatch( counterActions.setCounterDetailsType('started') );
         
+        //then
         expect( store.getState().counterDetails ).toEqual({
             ...initialState.counterDetails,
             flag: 'started'

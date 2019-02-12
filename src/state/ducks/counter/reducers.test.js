@@ -5,6 +5,7 @@ describe('Reducer counterReducer', () => {
     let initialState;
 
     beforeEach(() => {
+        //given
         initialState = {
             countdownTime: 1500,
             countdownStart: 1548574970,
@@ -15,11 +16,14 @@ describe('Reducer counterReducer', () => {
     });
 
     it('return default initial state when no action passed', () => {
+        //when
         const newState = reducer(undefined, {});
+        //then
         expect(newState).toEqual({ flag: 'not_started' });
     });
 
     it('return proper state when action types.CHANGE_COUNTER_DETAILS passed', () => {
+        //given
         const action = {
             type: types.CHANGE_COUNTER_DETAILS,
             payload: {
@@ -30,20 +34,27 @@ describe('Reducer counterReducer', () => {
                 flag: 'in_progress'
             }
         };
+
+        //when
         const newState = reducer(initialState, action);
         
+        //then
         expect(newState).toEqual(action.payload);
     });
 
     it('return proper state when action types.CHANGE_COUNTER_DETAILS_TYPE passed', () => {
+        //given
         const action = {
             type: types.CHANGE_COUNTER_DETAILS_TYPE,
             payload: {
                 flag: 'started'
             }
         };
+
+        //when
         const newState = reducer(initialState, action);
 
+        //then
         expect(newState).toEqual({
             ...initialState,
             flag: action.payload.flag
@@ -51,11 +62,15 @@ describe('Reducer counterReducer', () => {
     });
 
     it('handles action with unknown type', () => {
+        //given
         const action = {
             type: 'ASDFASDF'
         };
+
+        //when
         const newState = reducer(initialState, action);
 
+        //then
         expect(newState).toEqual(initialState);
     });
 });

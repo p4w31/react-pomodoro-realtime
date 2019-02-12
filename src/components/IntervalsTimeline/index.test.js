@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount, shallow, render } from 'enzyme';
 import IntervalsTimeline from './index';
-import sinon from 'sinon';
 import  { findByTestAttr, checkProps } from '../../test/helpers';
 
 let wrapped = null;

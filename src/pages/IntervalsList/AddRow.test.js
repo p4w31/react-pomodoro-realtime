@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount, shallow, render } from 'enzyme';
 import { AddRow } from './AddRow';
 import sinon from 'sinon';

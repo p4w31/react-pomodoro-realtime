@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount, shallow, render } from 'enzyme';
 import { LoginFormDialog } from './LoginFormDialog';
 import sinon from 'sinon';

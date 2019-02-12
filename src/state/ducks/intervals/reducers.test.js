@@ -6,6 +6,7 @@ describe('Reducer intervalsReducer', () => {
     let initialState;
 
     beforeEach(() => {
+        //given
         initialState = {
             items: [
                 {
@@ -30,17 +31,24 @@ describe('Reducer intervalsReducer', () => {
     });
 
     it('return default initial state when no action passed', () => {
+        //when
         const newState = reducer(undefined, {});
+
+        //then
         expect(newState).toEqual({ items: [], loading: false });
     });
 
     it('return proper state when action types.FETCH_INTERVALS passed', () => {
+        //given
         const action = {
             type: types.FETCH_INTERVALS,
             payload: dbMocks.getIntervals()
         };
+
+        //when
         const newState = reducer(initialState, action);
         
+        //then
         expect(newState).toEqual({
             items: [
                 {
@@ -65,11 +73,15 @@ describe('Reducer intervalsReducer', () => {
     });
 
     it('return proper state when action types.FETCH_INTERVALS_BEGIN passed', () => {
+        //given
         const action = {
             type: types.FETCH_INTERVALS_BEGIN
         };
+
+        //when
         const newState = reducer(initialState, action);
 
+        //then
         expect(newState).toEqual({
             ...initialState,
             loading: true
@@ -77,11 +89,15 @@ describe('Reducer intervalsReducer', () => {
     });
 
     it('handles action with unknown type', () => {
+        //given
         const action = {
             type: 'ASDFASDF'
         };
+
+        //when
         const newState = reducer(initialState, action);
 
+        //then
         expect(newState).toEqual(initialState);
     });
 });
