@@ -5,7 +5,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import withAuthorization from '../../components/withAuthorization';
 import withLoadingBars from '../../components/withLoadingBars';
-import AnimatedCounter from './AnimatedCounter';
+import AnimatedCounterContainer from './AnimatedCounterContainer';
 import IntervalsTimeline from '../../components/IntervalsTimeline';
 import CounterButtons from './CounterButtons';
 import { intervalsActions, intervalsSelectors } from '../../state/ducks/intervals';
@@ -53,12 +53,12 @@ class TimersPage extends Component {
         } = this.props;
 
         return (
-            <div className="timers-page-wrapper">
+            <div className="timers-page-wrapper" data-test="timers-page-component">
                 <IntervalsTimelineWithLoadingBars 
                     isLoading={intervals.loading} 
                     intervals={intervals.items} 
                 />
-                <AnimatedCounter />
+                <AnimatedCounterContainer />
                 <CounterButtons />
             </div>
         );
@@ -79,5 +79,7 @@ function mapDispatchToProps(dispatch) {
 
 TimersPage.defaultProps = defaultProps;
 TimersPage.propTypes = propTypes;
+
+export { TimersPage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthorization(TimersPage));

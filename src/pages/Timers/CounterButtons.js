@@ -21,6 +21,10 @@ const propTypes = {
     addInterval: PropTypes.func,
 };
 
+/**
+ * TODO: after changing break-work flow add unit test
+ */
+
 class CounterButtons extends Component {
     constructor (props) {
         super(props);
