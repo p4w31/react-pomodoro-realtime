@@ -120,7 +120,7 @@ class CounterButtons extends Component {
     static getDerivedStateFromProps(props, state) {
         if (props.counterDetails.type !== state.lastCountdownType) {
             return {
-                lastCountdownType: props.counterDetails.countdownTime,
+                lastCountdownTime: props.counterDetails.countdownTime, 
                 shouldChangeButtons: true
             };
         }
@@ -129,6 +129,13 @@ class CounterButtons extends Component {
     }
 
     componentDidUpdate() {
+        if (this.state.shouldChangeButtons === true) {
+            this.setButtons();
+            this.setState({ shouldChangeButtons: false });
+        } 
+    }
+
+    componentDidMount() {
         if (this.state.shouldChangeButtons === true) {
             this.setButtons();
             this.setState({ shouldChangeButtons: false });
